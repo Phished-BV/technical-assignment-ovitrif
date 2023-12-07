@@ -14,5 +14,5 @@ class Order extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'total'];
+    protected $fillable = ['total'];
 }

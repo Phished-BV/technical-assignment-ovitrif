@@ -1,7 +1,10 @@
 <?php
 
+use App\Mail\OrderMail;
+use App\Models\Order;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +20,11 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+Artisan::command('mail:send', function () {
+    $recipientEmail = env('MAIL_TO_ADDRESS');
+    // Create order
+    $order = Order::factory()->create();
+    // Send mail
+    Mail::to($recipientEmail)->send(new OrderMail($order));
+});

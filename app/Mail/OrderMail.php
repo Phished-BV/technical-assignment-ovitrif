@@ -40,6 +40,9 @@ class OrderMail extends Mailable
     {
         return new Content(
             markdown: 'emails.orders',
+            with:[
+                'order' => $this->order,
+            ]
         );
     }
 

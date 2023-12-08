@@ -42,7 +42,7 @@ class OrderMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.orders',
+            markdown: 'mail.order',
             with: [
                 'id' => $this->order['id'],
                 'address' => $this->order['address'],

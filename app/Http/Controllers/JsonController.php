@@ -13,8 +13,8 @@ class JsonController extends Controller
         $jsonData = $request->json()->all();
 
         // Process the JSON data
-        Log::info('This is an info message.');
-        Log::info('Data received: ' . $jsonData['key']);
+        $jsonString = json_encode($jsonData);
+        Log::info($jsonString);
 
         // Return a JSON response if needed
         return response()->json(['message' => 'Data received and processed']);

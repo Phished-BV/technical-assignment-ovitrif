@@ -13,7 +13,7 @@
                     </thead>
                     <tbody>
                     @foreach ($orders as $order)
-                        <tr class="text-sm border-b border-gray-200">
+                        <tr class="text-sm border-b border-gray-200 even:bg-gray-50 hover:bg-gray-100">
                             <td class="p-2">{{ $order->public_id }}</td>
                             <td class="p-2">${{ $order->total }}</td>
                             <td class="p-2">{{ $order->address }}</td>

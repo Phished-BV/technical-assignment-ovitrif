@@ -20,9 +20,10 @@
                             <td class="p-2">{{ $order->address }}</td>
                             <td class="p-2">{{ $order->recipient }}</td>
                             <td class="p-2 text-right">
-                                <x-secondary-button class="invisible group-hover:visible">
-                                    {{ __('Reply') }}
-                                </x-secondary-button>
+                                <a href="{{ route('orders.edit', $order) }}"
+                                   class="invisible group-hover:visible rounded-md border border-gray-10 p-2 bg-white">
+                                        {{ __('Reply') }}
+                                </a>
                             </td>
                         </tr>
                     @endforeach
@@ -31,4 +32,5 @@
             </div>
         </div>
     </div>
+
 </x-app-layout>

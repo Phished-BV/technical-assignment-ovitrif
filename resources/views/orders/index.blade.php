@@ -5,10 +5,10 @@
                 <table class="table-fixed min-w-full">
                     <thead class="border-b border-gray-300">
                     <tr class="text-left">
-                        <th class="p-2">Id</th>
-                        <th class="p-2">Total</th>
-                        <th class="p-2 w-2/6">Address</th>
-                        <th class="p-2">Recipient</th>
+                        <th class="p-2">{{ __('Id') }}</th>
+                        <th class="p-2">{{ __('Total') }}</th>
+                        <th class="p-2 w-2/6">{{ __('Address') }}</th>
+                        <th class="p-2">{{ __('Recipient') }}</th>
                         <th class="p-2"></th>
                     </tr>
                     </thead>

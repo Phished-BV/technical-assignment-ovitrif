@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderReplyMail;
 use App\Models\Order;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class OrderController extends Controller
@@ -34,10 +36,12 @@ class OrderController extends Controller
         ]);
 
         $order->update($validated);
-        // TODO send email
+
+        // TODO delegate to an event
+        Mail::send(new OrderReplyMail([
+            'message' => $validated['reply'],
+        ]));
 
         return redirect(route('orders.index'));
     }
-
-
 }

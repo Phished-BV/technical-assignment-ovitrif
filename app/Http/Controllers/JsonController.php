@@ -17,8 +17,11 @@ class JsonController extends Controller
         $messageBody = $jsonData['Snippet'];
         $orderData = $this->extractOrderData($messageBody);
         $this->logOrderData($orderData);
-        // create order entity in database
-        // $orderEntity = Order::create($orderData);
+
+        // Record order entity in database
+        $orderEntity = Order::create($orderData);
+
+        Log::info('Registered order with id: ' . $orderEntity->id, ['id' => $orderEntity->id]);
 
         // Return a JSON response if needed
         return response()->json(['message' => 'Data received and processed']);

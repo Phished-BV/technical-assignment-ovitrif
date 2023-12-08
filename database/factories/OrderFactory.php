@@ -17,9 +17,11 @@ class OrderFactory extends Factory
      */
     public function definition(): array
     {
-        // generate a random integer
         return [
-            'total' => rand(1, 5000),
+            // Fill with fake data
+            // 'total' => $this->faker->numberBetween(100, 5000),
+            // 'address' => $this->faker->address(),
+            // 'recipient' => $this->faker->name(),
         ];
     }
 }

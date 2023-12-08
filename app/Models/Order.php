@@ -14,5 +14,9 @@ class Order extends Model
      *
      * @var array
      */
-    protected $fillable = ['total'];
+    protected $fillable = [
+        'total',
+        'address',
+        'recipient',
+    ];
 }

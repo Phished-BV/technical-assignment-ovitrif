@@ -14,30 +14,59 @@ class JsonController extends Controller
 
         // Process the JSON data
         $messageBody = $jsonData['Snippet'];
-        $jsonString = $this->parseEmail($messageBody);
-        // $jsonString = $this->parseSummary($jsonData);
-        // $keys = array_keys($jsonData);
-        // $keysString = implode(', ', $keys);
-        Log::info($jsonString);
+        $orderData = $this->extractOrderData($messageBody);
+        $this->logOrderData($orderData);
 
         // Return a JSON response if needed
         return response()->json(['message' => 'Data received and processed']);
     }
 
-    // TODO return an associative array of the order data
-    private function parseEmail($emailBody): string
+    private function logOrderData(array $orderData)
+    {
+        $orderDataString = json_encode($orderData);
+        Log::info($orderDataString);
+    }
+
+    private function extractOrderData($emailBody): array
     {
         $total = $this->extractTotal($emailBody);
-        return "Total Value: $total";
+        $address = $this->extractAddress($emailBody);
+        $recipient = $this->extractRecipient($emailBody);
+
+        return [
+            'total' => $total,
+            'address' => $address,
+            'recipient' => $recipient,
+        ];
     }
 
     private function extractTotal($messageBody): int
     {
         $pattern = '/Total:\s+\$(\d+);/';
-        if (preg_match($pattern, $messageBody,$matches)) {
-            return (int) $matches[1];
+        if (preg_match($pattern, $messageBody, $matches)) {
+            return (int)$matches[1];
         } else {
             return 0;
+        }
+    }
+
+    private function extractAddress($messageBody): string
+    {
+        $pattern = '/Address:\s(.*?);/';
+        if (preg_match($pattern, $messageBody, $matches)) {
+            return trim($matches[1]);
+        } else {
+            return '';
+        }
+    }
+
+    private function extractRecipient($messageBody): string
+    {
+        $pattern = '/Recipient:\s(.*?)(?=\.)/';
+        if (preg_match($pattern, $messageBody, $matches)) {
+            return trim($matches[1]);
+        } else {
+            return '';
         }
     }
 }

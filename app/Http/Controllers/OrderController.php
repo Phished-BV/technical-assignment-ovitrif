@@ -40,6 +40,7 @@ class OrderController extends Controller
         // TODO delegate to an event
         Mail::send(new OrderReplyMail([
             'message' => $validated['reply'],
+            'id' => $order->public_id,
         ]));
 
         return redirect(route('orders.index'));

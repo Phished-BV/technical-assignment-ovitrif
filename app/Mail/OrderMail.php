@@ -18,7 +18,7 @@ class OrderMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(Order $order)
+    public function __construct(array $order)
     {
         $this->order = $order;
     }
@@ -41,7 +41,10 @@ class OrderMail extends Mailable
         return new Content(
             markdown: 'emails.orders',
             with:[
-                'order' => $this->order,
+                'id' => $this->order['id'],
+                'address' => $this->order['address'],
+                'recipient' => $this->order['recipient'],
+                'total' => $this->order['total'],
             ]
         );
     }

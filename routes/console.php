@@ -1,7 +1,6 @@
 <?php
 
 use App\Mail\OrderMail;
-use App\Models\Order;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
@@ -23,8 +22,14 @@ Artisan::command('inspire', function () {
 
 Artisan::command('mail:send', function () {
     $recipientEmail = env('MAIL_TO_ADDRESS');
-    // Create order
-    $order = Order::factory()->create();
+
+    // Generate order data
+    $orderData = [
+        'id' => fake()->numberBetween(10000, 50000),
+        'address' => fake()->address(),
+        'recipient' => fake()->name(),
+        'total' => fake()->numberBetween(100, 5000),
+    ];
     // Send mail
-    Mail::to($recipientEmail)->send(new OrderMail($order));
+    Mail::to($recipientEmail)->send(new OrderMail($orderData));
 });

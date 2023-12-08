@@ -1,11 +1,11 @@
 <x-mail::message>
 Your order has been placed.
 
-# Order id: {{ $order->id }}
+# Order id: {{ $id }}
 
-- **Total:** ${{ $order->total }};
-- **Address:** Some Street 123, 1234 AB, Some City;
-- **Recipient:** First LastName.
+- **Total:** ${{ $total }};
+- **Address:** {{ $address }};
+- **Recipient:** {{ $recipient }}.
 
 Thanks,<br>
 {{ config('app.name') }}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -16,6 +17,8 @@ class JsonController extends Controller
         $messageBody = $jsonData['Snippet'];
         $orderData = $this->extractOrderData($messageBody);
         $this->logOrderData($orderData);
+        // create order entity in database
+        // $orderEntity = Order::create($orderData);
 
         // Return a JSON response if needed
         return response()->json(['message' => 'Data received and processed']);

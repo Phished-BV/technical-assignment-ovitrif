@@ -19,5 +19,6 @@ class Order extends Model
         'address',
         'recipient',
         'public_id',
+        'reply',
     ];
 }

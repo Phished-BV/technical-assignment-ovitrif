@@ -20,10 +20,16 @@
                             <td class="p-2">{{ $order->address }}</td>
                             <td class="p-2">{{ $order->recipient }}</td>
                             <td class="p-2 text-right">
-                                <a href="{{ route('orders.edit', $order) }}"
-                                   class="invisible group-hover:visible rounded-md border border-gray-10 p-2 bg-white">
+                                @if(!$order->reply)
+                                    <a href="{{ route('orders.edit', $order) }}"
+                                       class="invisible group-hover:visible rounded-md border border-gray-10 p-2 bg-white">
                                         {{ __('Reply') }}
-                                </a>
+                                    </a>
+                                @else
+                                    <span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-50 text-green-800">
+                                        {{ __('Replied') }}
+                                    </span>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

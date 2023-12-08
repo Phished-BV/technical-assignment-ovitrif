@@ -21,8 +21,6 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Artisan::command('mail:send', function () {
-    $recipientEmail = env('MAIL_TO_ADDRESS');
-
     // Generate order data
     $orderData = [
         'id' => fake()->numberBetween(10000, 50000),
@@ -31,5 +29,5 @@ Artisan::command('mail:send', function () {
         'total' => fake()->numberBetween(100, 5000),
     ];
     // Send mail
-    Mail::to($recipientEmail)->send(new OrderMail($orderData));
+    Mail::send(new OrderMail($orderData));
 });

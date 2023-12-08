@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderMail;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -13,7 +14,11 @@ class JsonController extends Controller
         // Access the JSON data from the request
         $jsonData = $request->json()->all();
 
-        // Process the JSON data
+        if (!$this->isOrderMail($jsonData)) {
+            return response()->json(['message' => 'Not an order mail']);
+        }
+
+        // Process Order Email
         $messageBody = $jsonData['Snippet'];
         $orderData = $this->extractOrderData($messageBody);
         $this->logOrderData($orderData);
@@ -25,6 +30,12 @@ class JsonController extends Controller
 
         // Return a JSON response if needed
         return response()->json(['message' => 'Data received and processed']);
+    }
+
+    private function isOrderMail($jsonData): bool
+    {
+        $targetMailbox = $jsonData['To'][0]['Address'];
+        return $targetMailbox === OrderMail::MAILBOX;
     }
 
     private function logOrderData(array $orderData)

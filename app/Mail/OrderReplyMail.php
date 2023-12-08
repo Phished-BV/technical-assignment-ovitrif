@@ -29,7 +29,7 @@ class OrderReplyMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(address: 'admin@example.com', name: 'Admin'),
+            from: new Address(address: 'admin@example.com', name: 'Reply'),
             to: 'reply@example.com',
             subject: 'Order ' . $this->data['id'] . ' Reply',
         );

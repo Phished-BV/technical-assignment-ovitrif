@@ -2,9 +2,9 @@
 
 namespace App\Mail;
 
-use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -13,6 +13,7 @@ class OrderMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    const MAILBOX = 'orders@example.com';
     public $order;
 
     /**
@@ -29,7 +30,9 @@ class OrderMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Order Mail',
+            from: new Address(address: 'order@example.com', name: 'Order'),
+            to: self::MAILBOX,
+            subject: 'Order ' . $this->order['id'] . ' Created',
         );
     }
 
@@ -40,7 +43,7 @@ class OrderMail extends Mailable
     {
         return new Content(
             markdown: 'emails.orders',
-            with:[
+            with: [
                 'id' => $this->order['id'],
                 'address' => $this->order['address'],
                 'recipient' => $this->order['recipient'],

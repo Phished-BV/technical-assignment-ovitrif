@@ -38,11 +38,13 @@ class JsonController extends Controller
         $total = $this->extractTotal($emailBody);
         $address = $this->extractAddress($emailBody);
         $recipient = $this->extractRecipient($emailBody);
+        $publicId = $this->extractPublicId($emailBody);
 
         return [
             'total' => $total,
             'address' => $address,
             'recipient' => $recipient,
+            'public_id' => $publicId,
         ];
     }
 
@@ -69,6 +71,16 @@ class JsonController extends Controller
     private function extractRecipient($emailBody): string
     {
         $pattern = '/Recipient:\s(.*?)(?=\.)/';
+        if (preg_match($pattern, $emailBody, $matches)) {
+            return trim($matches[1]);
+        } else {
+            return '';
+        }
+    }
+
+    private function extractPublicId($emailBody): string
+    {
+        $pattern = '/id:\s*(\d+)\./';
         if (preg_match($pattern, $emailBody, $matches)) {
             return trim($matches[1]);
         } else {

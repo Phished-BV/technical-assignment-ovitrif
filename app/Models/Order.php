@@ -18,5 +18,6 @@ class Order extends Model
         'total',
         'address',
         'recipient',
+        'public_id',
     ];
 }

@@ -46,30 +46,30 @@ class JsonController extends Controller
         ];
     }
 
-    private function extractTotal($messageBody): int
+    private function extractTotal($emailBody): int
     {
         $pattern = '/Total:\s+\$(\d+);/';
-        if (preg_match($pattern, $messageBody, $matches)) {
+        if (preg_match($pattern, $emailBody, $matches)) {
             return (int)$matches[1];
         } else {
             return 0;
         }
     }
 
-    private function extractAddress($messageBody): string
+    private function extractAddress($emailBody): string
     {
         $pattern = '/Address:\s(.*?);/';
-        if (preg_match($pattern, $messageBody, $matches)) {
+        if (preg_match($pattern, $emailBody, $matches)) {
             return trim($matches[1]);
         } else {
             return '';
         }
     }
 
-    private function extractRecipient($messageBody): string
+    private function extractRecipient($emailBody): string
     {
         $pattern = '/Recipient:\s(.*?)(?=\.)/';
-        if (preg_match($pattern, $messageBody, $matches)) {
+        if (preg_match($pattern, $emailBody, $matches)) {
             return trim($matches[1]);
         } else {
             return '';

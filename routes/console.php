@@ -1,6 +1,6 @@
 <?php
 
-use App\Mail\OrderMail;
+use App\Mail\OrderMailSimulation;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
@@ -20,15 +20,6 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-Artisan::command('mail:send', function () {
-    // Generate order data
-    $orderData = [
-        'id' => fake()->numberBetween(10000, 50000),
-        'recipient_email' => fake()->email(),
-        'address' => fake()->address(),
-        'recipient' => fake()->name(),
-        'total' => fake()->numberBetween(100, 5000),
-    ];
-    // Send mail
-    Mail::send(new OrderMail($orderData));
-});
+Artisan::command('mail:order', function () {
+    Mail::send(new OrderMailSimulation());
+})->purpose('Simulate receiving a new order email');

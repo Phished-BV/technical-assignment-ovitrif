@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\OrderMailReceived;
-use App\Mail\OrderMail;
+use App\Mail\OrderMailSimulation;
 use Illuminate\Http\Request;
 
 class JsonController extends Controller
@@ -28,6 +28,6 @@ class JsonController extends Controller
     private function isOrderMail($jsonData): bool
     {
         $targetMailbox = $jsonData['To'][0]['Address'];
-        return $targetMailbox === OrderMail::MAILBOX;
+        return $targetMailbox === OrderMailSimulation::MAILBOX;
     }
 }

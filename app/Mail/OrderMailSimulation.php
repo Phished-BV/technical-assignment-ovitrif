@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class OrderMail extends Mailable
+class OrderMailSimulation extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,9 +19,16 @@ class OrderMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(array $order)
+    public function __construct()
     {
-        $this->order = $order;
+        $this->order = [
+            'id' => fake()->numberBetween(10000, 50000),
+            'recipient_email' => fake()->email(),
+            'address' => fake()->address(),
+            'recipient' => fake()->name(),
+            'total' => fake()->numberBetween(100, 5000),
+        ];
+
     }
 
     /**

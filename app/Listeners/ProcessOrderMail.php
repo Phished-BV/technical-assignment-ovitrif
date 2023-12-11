@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 
-class ProcessOrderMail
+class ProcessOrderMail implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -23,6 +23,7 @@ class ProcessOrderMail
      */
     public function handle(OrderMailReceived $event): void
     {
+        // Parse order details from email
         $orderData = $this->extractOrderData($event);
 
         // Record order entity in database

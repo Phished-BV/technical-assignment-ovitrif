@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Events\OrderMailReceived;
 use App\Mail\OrderMailSimulation;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class MailHookController extends Controller
 {
-    public function handle(Request $request)
+    /**
+     * Handle an incoming request.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function handle(Request $request): JsonResponse
     {
         $jsonData = $request->json()->all();
 

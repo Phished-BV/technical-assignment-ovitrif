@@ -6,7 +6,7 @@ use App\Events\OrderMailReceived;
 use App\Mail\OrderMailSimulation;
 use Illuminate\Http\Request;
 
-class JsonController extends Controller
+class MailHookController extends Controller
 {
     public function handle(Request $request)
     {

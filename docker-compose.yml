@@ -54,7 +54,7 @@ services:
             - '${FORWARD_MAILPIT_PORT:-1025}:1025'
             - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
         environment:
-            MP_WEBHOOK_URL: 'http://laravel.test:80/api/json'
+            MP_WEBHOOK_URL: 'http://laravel.test:80/api/hooks/mail'
         networks:
             - sail
 networks:

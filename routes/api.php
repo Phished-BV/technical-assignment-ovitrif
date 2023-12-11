@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\JsonController;
+use App\Http\Controllers\MailHookController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/json', [JsonController::class, 'handle']);
+Route::post('/hooks/mail', [MailHookController::class, 'handle']);

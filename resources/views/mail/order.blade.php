@@ -5,7 +5,7 @@ Your order has been placed.
 
 - **Total:** ${{ $total }};
 - **Address:** {{ $address }};
-- **Recipient:** {{ $recipient }}.
+- **Recipient:** {{ $recipient }};
 
 Thanks,<br>
 {{ config('app.name') }}

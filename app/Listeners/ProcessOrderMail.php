@@ -73,7 +73,7 @@ class ProcessOrderMail
 
     private function extractRecipient($emailBody): string
     {
-        $pattern = '/Recipient:\s(.*?)(?=\.)/';
+        $pattern = '/Recipient:\s(.*?);/';
         if (preg_match($pattern, $emailBody, $matches)) {
             return trim($matches[1]);
         } else {

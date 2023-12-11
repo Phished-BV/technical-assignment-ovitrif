@@ -14,7 +14,7 @@ class OrderMail extends Mailable
     use Queueable, SerializesModels;
 
     const MAILBOX = 'orders@example.com';
-    public $order;
+    public array $order;
 
     /**
      * Create a new message instance.
@@ -30,7 +30,7 @@ class OrderMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(address: 'order@example.com', name: 'Order'),
+            from: new Address(address: $this->order['recipient_email'], name: $this->order['recipient']),
             to: self::MAILBOX,
             subject: 'Order ' . $this->order['id'] . ' Created',
         );

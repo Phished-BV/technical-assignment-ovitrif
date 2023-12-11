@@ -18,6 +18,7 @@ class Order extends Model
         'total',
         'address',
         'recipient',
+        'recipient_email',
         'public_id',
         'reply',
     ];

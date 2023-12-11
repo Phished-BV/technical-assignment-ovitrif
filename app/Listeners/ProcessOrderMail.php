@@ -23,7 +23,7 @@ class ProcessOrderMail
      */
     public function handle(OrderMailReceived $event): void
     {
-        $orderData = $this->extractOrderData($event->emailBody);
+        $orderData = $this->extractOrderData($event);
 
         // Record order entity in database
         $orderEntity = Order::create($orderData);
@@ -33,9 +33,10 @@ class ProcessOrderMail
         Log::info('Registered order with id: ' . $orderEntity->id, ['id' => $orderEntity->id]);
     }
 
-
-    private function extractOrderData($emailBody): array
+    private function extractOrderData($event): array
     {
+        $emailBody = $event->emailBody;
+
         $total = $this->extractTotal($emailBody);
         $address = $this->extractAddress($emailBody);
         $recipient = $this->extractRecipient($emailBody);
@@ -46,6 +47,7 @@ class ProcessOrderMail
             'address' => $address,
             'recipient' => $recipient,
             'public_id' => $publicId,
+            'recipient_email' => $event->emailAddress,
         ];
     }
 

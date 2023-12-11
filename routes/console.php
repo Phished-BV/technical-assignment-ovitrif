@@ -24,6 +24,7 @@ Artisan::command('mail:send', function () {
     // Generate order data
     $orderData = [
         'id' => fake()->numberBetween(10000, 50000),
+        'recipient_email' => fake()->email(),
         'address' => fake()->address(),
         'recipient' => fake()->name(),
         'total' => fake()->numberBetween(100, 5000),

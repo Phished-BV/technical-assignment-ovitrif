@@ -18,7 +18,9 @@ class JsonController extends Controller
         }
 
         $emailBody = $jsonData['Snippet'];
-        event(new OrderMailReceived($emailBody));
+        $emailAddress = $jsonData['From']['Address'];
+
+        event(new OrderMailReceived($emailBody, $emailAddress));
 
         return response()->json(['message' => 'Data received and processed']);
     }

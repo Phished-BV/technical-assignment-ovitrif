@@ -17,7 +17,10 @@ class OrderMailReceived
     /**
      * Create a new event instance.
      */
-    public function __construct(public string $emailBody)
+    public function __construct(
+        public string $emailBody,
+        public string $emailAddress,
+    )
     {
         //
     }

@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
@@ -13,14 +14,11 @@ class OrderReplyMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public array $data;
-
     /**
      * Create a new message instance.
      */
-    public function __construct(array $data)
+    public function __construct(public Order $order)
     {
-        $this->data = $data;
     }
 
     /**
@@ -30,8 +28,8 @@ class OrderReplyMail extends Mailable
     {
         return new Envelope(
             from: new Address(address: 'admin@example.com', name: 'Reply'),
-            to: 'reply@example.com',
-            subject: 'Order ' . $this->data['id'] . ' Reply',
+            to: $this->order->recipient_email,
+            subject: 'Order ' . $this->order->public_id . ' Reply',
         );
     }
 
@@ -43,7 +41,7 @@ class OrderReplyMail extends Mailable
         return new Content(
             markdown: 'mail.reply',
             with: [
-                'message' => $this->data['message'],
+                'message' => $this->order->reply,
             ]
         );
     }

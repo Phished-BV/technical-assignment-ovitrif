@@ -22,9 +22,6 @@ class SendOrderReplyMail implements ShouldQueue
      */
     public function handle(OrderReplied $event): void
     {
-        Mail::send(new OrderReplyMail([
-            'message' => $event->order->reply,
-            'id' => $event->order->public_id,
-        ]));
+        Mail::send(new OrderReplyMail($event->order));
     }
 }

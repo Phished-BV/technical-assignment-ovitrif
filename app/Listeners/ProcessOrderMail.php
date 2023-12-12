@@ -5,8 +5,6 @@ namespace App\Listeners;
 use App\Events\OrderMailReceived;
 use App\Models\Order;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Facades\Log;
 
 class ProcessOrderMail implements ShouldQueue
 {
@@ -27,11 +25,7 @@ class ProcessOrderMail implements ShouldQueue
         $orderData = $this->extractOrderData($event);
 
         // Record order entity in database
-        $orderEntity = Order::create($orderData);
-
-        // Log order info
-        Log::info(json_encode($orderData));
-        Log::info('Registered order with id: ' . $orderEntity->id, ['id' => $orderEntity->id]);
+        Order::create($orderData);
     }
 
     private function extractOrderData($event): array

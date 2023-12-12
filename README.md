@@ -3,6 +3,11 @@
 This is a simple Laravel project to simulate the processing of incoming order emails, listing them in an authenticated
 route and allowing the admin to reply to an order.
 
+**Context**
+- The project was started using the laravel command to create a new project.  
+- Development machine used was a Macbook Pro M1.
+- IDE used was PhpStorm 2023.2.4.
+
 ## Requirements
 
 - [Docker Desktop](https://docs.docker.com/engine/install/)

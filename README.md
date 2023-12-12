@@ -3,6 +3,8 @@
 This is a simple Laravel project to simulate the processing of incoming order emails, listing them in an authenticated
 route and allowing the admin to reply to an order.
 
+See [README_ORIGINAL.md](./README_ORIGINAL.md) for the original assignment instructions.
+
 **Context**
 - The project was started using the laravel command to create a new project.  
 - Development machine used was a Macbook Pro M1.

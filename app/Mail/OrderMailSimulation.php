@@ -9,6 +9,9 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * Encapsulates the logic to simulate receiving an order email.
+ */
 class OrderMailSimulation extends Mailable
 {
     use Queueable, SerializesModels;

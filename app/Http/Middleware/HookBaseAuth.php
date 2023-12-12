@@ -15,6 +15,7 @@ class HookBaseAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // Simplest form of basic auth to protect the webhook endpoint.
         if (!config('baseauth.users')->contains([$request->getUser(), $request->getPassword()])) {
             $headers = ['WWW-Authenticate' => 'Basic'];
             return response('Invalid credentials.', 401, $headers);

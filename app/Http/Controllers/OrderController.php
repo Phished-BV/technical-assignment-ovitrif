@@ -34,6 +34,8 @@ class OrderController extends Controller
             'reply' => 'required|string|max:255',
         ]);
 
+        // This logic should be moved to a domain class (repository or use case)
+        // The controller should only be responsible for handling HTTP requests
         $order->update($validated);
 
         event(new OrderReplied($order));
